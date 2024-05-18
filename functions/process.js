@@ -8,7 +8,7 @@ exports.handler = async (event) => {
         const { email, password } = body;
 
         // MongoDB connection URI
-        const uri = 'mongodb+srv://ahmed33elsayed22:12345@users.pq56gh5.mongodb.net/users?retryWrites=true&w=majority&appName=users';
+        const uri = 'mongodb+srv://ahmed33elsayed22:12345@users.pq56gh5.mongodb.net/?retryWrites=true&w=majority&appName=users';
 
         // Create a new MongoClient
         const client = new MongoClient(uri);
@@ -17,8 +17,8 @@ exports.handler = async (event) => {
         await client.connect();
 
         // Access the database and collection
-        const db = client.db('your-database-name'); // Replace 'your-database-name' with your actual database name
-        const collection = db.collection('your-collection-name'); // Replace 'your-collection-name' with your actual collection name
+        const db = client.db('users'); // Replace 'your-database-name' with your actual database name
+        const collection = db.collection('users'); // Replace 'your-collection-name' with your actual collection name
 
         // Insert a document
         const result = await collection.insertOne({ email, password });
