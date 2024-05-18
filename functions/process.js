@@ -8,7 +8,7 @@ exports.handler = async (event) => {
         const { email, password } = body;
 
         // MongoDB connection URI
-        const uri = 'mongodb+srv://ahmed33elsayed22:12345@users.pq56gh5.mongodb.net/?retryWrites=true&w=majority&appName=users';
+        const uri = 'mongodb+srv://ahmed33elsayed22:12345@users.pq56gh5.mongodb.net/users?retryWrites=true&w=majority&appName=users';
 
         // Create a new MongoClient
         const client = new MongoClient(uri);
