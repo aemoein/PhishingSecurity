@@ -1,4 +1,4 @@
-const mysql = require('mysql2/promise');
+const { MongoClient } = require('mongodb');
 const querystring = require('querystring');
 
 exports.handler = async (event) => {
@@ -7,25 +7,33 @@ exports.handler = async (event) => {
         const body = querystring.parse(event.body);
         const { email, password } = body;
 
-        // Create a MySQL connection pool
-        const connection = await mysql.createConnection({
-            host: 'localhost',
-            user: 'root',
-            password: '12345',
-            database: 'users'
-        });
+        // MongoDB connection URI
+        const uri = 'mongodb+srv://ahmed33elsayed22:12345@users.pq56gh5.mongodb.net/?retryWrites=true&w=majority&appName=users';
 
-        // Execute the SQL query
-        const [rows, fields] = await connection.execute('INSERT INTO users (email, password) VALUES (?, ?)', [email, password]);
+        // Create a new MongoClient
+        const client = new MongoClient(uri);
+
+        // Connect to the MongoDB cluster
+        await client.connect();
+
+        // Access the database and collection
+        const db = client.db('your-database-name'); // Replace 'your-database-name' with your actual database name
+        const collection = db.collection('your-collection-name'); // Replace 'your-collection-name' with your actual collection name
+
+        // Insert a document
+        const result = await collection.insertOne({ email, password });
+
+        // Log the result
+        console.log(`Inserted ${result.insertedCount} documents into the collection`);
 
         // Close the connection
-        await connection.end();
+        await client.close();
 
         // Return a success response
         return {
             statusCode: 302, // Redirect status code
             headers: {
-                'Location': 'http://localhost:8888/' // Redirect URL
+                'Location': 'http://127.0.0.1:5500/index.html' // Redirect URL
             },
             body: ''
         };
