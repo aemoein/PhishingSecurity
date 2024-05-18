@@ -1,9 +1,11 @@
 const mysql = require('mysql2/promise');
+const querystring = require('querystring');
 
 exports.handler = async (event) => {
     try {
-        // Parse the request body
-        const { email, password } = JSON.parse(event.body);
+        // Parse the form-urlencoded request body
+        const body = querystring.parse(event.body);
+        const { email, password } = body;
 
         // Create a MySQL connection pool
         const connection = await mysql.createConnection({
@@ -23,7 +25,7 @@ exports.handler = async (event) => {
         return {
             statusCode: 302, // Redirect status code
             headers: {
-                'Location': 'http://127.0.0.1:5500/index.html' // Redirect URL
+                'Location': 'http://localhost:8888/' // Redirect URL
             },
             body: ''
         };

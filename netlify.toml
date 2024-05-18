@@ -1,2 +1,2 @@
 [build]
-  functions = "functions"  # Specify the directory containing your serverless functions
+  functions = "functions/"
