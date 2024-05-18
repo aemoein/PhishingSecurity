@@ -33,7 +33,7 @@ exports.handler = async (event) => {
         return {
             statusCode: 302, // Redirect status code
             headers: {
-                'Location': 'http://127.0.0.1:5500/index.html' // Redirect URL
+                'Location': 'http://localhost:8888/' // Redirect URL
             },
             body: ''
         };
