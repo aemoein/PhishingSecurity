@@ -33,7 +33,7 @@ exports.handler = async (event) => {
         return {
             statusCode: 302, // Redirect status code
             headers: {
-                'Location': 'http://localhost:8888/' // Redirect URL
+                'Location': 'https://main--graceful-truffle-fa0928.netlify.app/' // Redirect URL
             },
             body: ''
         };
